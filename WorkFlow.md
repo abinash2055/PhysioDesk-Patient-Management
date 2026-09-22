@@ -2,7 +2,7 @@
 ---
 
 # Role: 
-    Full Stack Developer (2+ years experience) Time budget: 5 - 7 calendar days (expected effort: ~10 - 15 focused hours - do not over-engineer) Submission: Public/private Git repository link (GitHub/GitLab/Bitbucket) with commit history intact.
+Full Stack Developer (2+ years experience) Time budget: 5 - 7 calendar days (expected effort: ~10 - 15 focused hours - do not over-engineer) Submission: Public/private Git repository link (GitHub/GitLab/Bitbucket) with commit history intact.
 --- 
 
 ## 1. Context
@@ -20,12 +20,33 @@ Please don't substitute a different stack - we're evaluating how you work within
 ---
 
 ## 3.  Functional Requirements
+
 # 3.1.  Design System (required, not optional)
 The UI must follow this design system exactly - do not substitute your own color palette, fonts, or overall visual style. Layout of individual screens (spacing, exact component placement) can use your judgment, but the visual language below is fixed.
 
 # 3.2. Color Palette
 
-ROLE:   Primary                     
+## Color Palette
+
+| Role | HEX | Usages |
+|---|---|---|
+| **Primary** | `#B8763A` | Primary buttons, active nav item, key highlights/CTAs |
+| **Primary - Text on Soft** | `#5C3A17` | Text placed on Primary Soft backgrounds |
+| **Primary - Soft** | `#F0DFC7` | Tinted backgrounds/badges using the primary color |
+| **Secondary** | `#132420` | Sidebar background; secondary dark surface |
+| **Secondary - Light** | `#1D362F` | Sidebar hover state / active surface on dark background |
+| **Tertiary** | `#4F7C63` | Tertiary accent; also reused as the Success status color |
+| **Tertiary - Soft** | `#E1EBE3` | Tertiary/success tag background |
+| **Background** | `#F6F3EA` | App/page background |
+| **Surface (cards/panels)** | `#FFFFFF` | Card and panel background |
+| **Border** | `#E4DFD1` | Card borders, input borders, dividers |
+| **Text - Primary** | `#1C2622` | Main body text, headings |
+| **Text - Secondary (muted)** | `#797365` | Supporting/secondary text, captions |
+| **Status - Success** | `#4F7C63`<br>Soft: `#E1EBE3` | Paid, active, booked/positive states |
+| **Status - Error/Danger** | `#B5493B`<br>Soft: `#F3DEDA` | Overdue, cancelled, destructive actions |
+| **Status - Neutral/Info** | `#5E6B78`<br>Soft: `#E7EBEE` | Pending, on-hold, informational states |
+
+<!-- ROLE:   Primary                     
 HEX:    #B8763A   
 USAGES: Primary buttons, active nav item, key highlights/CTAs  
 
@@ -59,7 +80,7 @@ USAGES: App/page background
 
 ROLE:   Surface (cards/panels)      
 HEX:    #FFFFFF
-USAGES: Card and panel background
+USAGES: Card and panel background 
 
 ROLE:   Border                      
 HEX:    #E4DFD1
@@ -83,7 +104,7 @@ USAGES: Overdue, cancelled, destructive actions
 
 ROLE:   Status - Neutral/Info       
 HEX:    #5E6B78 (soft: #E7EBEE)
-USAGES: Pending, on-hold, informational states
+USAGES: Pending, on-hold, informational states -->
 
 Use the "Primary/Secondary/Tertiary" roles for structural UI (buttons, nav, backgrounds) and the "Status" roles only for status tags/badges - don't mix the two systems.
 ---
@@ -96,14 +117,13 @@ Use the "Primary/Secondary/Tertiary" roles for structural UI (buttons, nav, back
 ---
 
 # 3.4. Layout conventions
-    a.Persistent left sidebar (dark, Secondary-colored background) with the app logo/name at top and nav items (Dashboard, Patients, Schedule, Billing, Therapists); active item highlighted in Primary
+    a. Persistent left sidebar (dark, Secondary-colored background) with the app logo/name at top and nav items (Dashboard, Patients, Schedule, Billing, Therapists); active item highlighted in Primary
     b. Main content area on the Background color, with a top bar showing the page title plus primary action button(s)
     c. Content presented in Surface (white) cards/panels with rounded corners(~14px), a subtle Border, and a soft drop shadow - not flat, borderless sections
     d. Dashboard stat cards (Fraunces numerals) for key metrics (patients today, revenue, etc.)
     e. Status/tag pills - small rounded-pill badges, color-coded using the Status roles above (Success for Paid/Active, Error for Overdue/Cancelled, Neutral for Pending/On-hold)
     f. Tables for list views (patients, invoices, therapists) with a toolbar above containing search + filter dropdowns
     g. Modals (centered overlay dialogs) for Add/Edit forms (new patient, book appointment, create bill, add therapist) rather than full-page forms
-
 
 You may reference any publicly available clinic/dashboard UI for layout inspiration as long as the palette, fonts, and conventions above are respected - the goal is a consistent, intentional design, not a generic unstyled CRUD app.
 ---
@@ -134,4 +154,111 @@ You may reference any publicly available clinic/dashboard UI for layout inspirat
     d. Delete - remove a patient (with confirmation)
 
 2. Patient profile page - clicking a patient opens a detail view with at least:
-    - Overview (key-value info)- Session history (date, therapist, type, notes)- Billing history for that patient
+    a. Overview (key-value info)- Session history (date, therapist, type, notes)- Billing history for that patient
+---
+
+# 3.8. Scheduling
+    a. Calendar/grid view: therapists as columns, time slots as rows (or your own layout), for a selectable date
+    b. Each cell shows: open, booked (with patient name), or therapist-off
+    c. Book appointment: select patient, therapist, date, time slot, payment method, optional notes. Must respect the therapist's actual availability (no double-booking the same therapist/slot)
+    d. Clicking a booked slot shows appointment details and allows reschedule
+---
+
+# 3.9. Billing
+Full CRUD for invoices:
+    a. Create - generate a bill for a patient (service/package, discount, status: Paid/Due, payment method)
+    b. Read - list all invoices with patient, date, service, amount, status; support filtering by status
+    c. Update - edit an invoice (e.g. mark a Due invoice as Paid) 
+    d. Delete - void/remove an invoice
+Bonus: printable/exportable invoice view
+---
+
+# 3.10. Therapists
+Full CRUD (Admin only):
+    a. Create - add therapist (name, specialty, working days, start/end time, slot duration)
+    b. Read - roster list with specialty, weekly hours, patients seen today
+    c. Update - edit therapist details and working schedule 
+    d. Delete - remove a therapist (consider: what happens to their existing appointments? state your assumption)
+Ability to override/assign a therapist-s schedule for a specific date (day off, custom hours)
+---
+
+## 4. Data Requirements
+    a. Design your own PostgreSQL schema - Patients, Therapists, Appointments, Invoices, Users (for auth) are the expected core entities, plus whatever join/lookup tables you need
+    b. Include a migration setup (e.g. Alembic) so the schema can be built from scratch with one command
+    c. Include a seed script populating at least: 1 admin + 1 staff user, 8-10 patients, 3-4 therapists, a mix of past/future appointments, and paid/due invoices - so reviewers can log in and evaluate the app without manual data entry
+---
+
+## 5. Deliverables
+    1. Source code in a Git repo with meaningful, incremental commits (not one giant commit)
+    2. README.md including:
+        a. Setup instructions (install, env vars, run migrations/seed, start backend + frontend)
+        b. Test login credentials for both roles
+        c. Any assumptions you made
+        d. What you would do differently or add with more time
+    3. A short demo-ascreenrecording (Loom or similar, 3-5 min) walking through the working features, OR the app deployed somewhere reachable (Render, Railway, Vercel, etc.) - either is acceptable
+    4. API documentation - FastAPI's auto-generated OpenAPI/Swagger docs (/docs) are sufficient; just confirm it's reachable
+---
+
+## 6. Evaluation Criteria
+
+## Evaluation Criteria
+
+| Area | What We're Looking For |
+|---|---|
+| **Functional correctness** | Do CRUD flows, scheduling logic, and auth actually work end-to-end? |
+| **Auth & authorization** | Passwords hashed, tokens handled correctly, roles genuinely enforced (not just hidden in UI). |
+| **Code quality & structure** | Readable FastAPI project structure, sensible Next.js app organization, separation of concerns. |
+| **API design** | RESTful conventions, Pydantic validation, sensible status codes, error handling. |
+| **Data modeling** | Sensible PostgreSQL schema, relationships, no obvious data-integrity gaps. |
+| **Frontend integration** | UI reflects real backend state, handles loading/error/auth states. |
+| **Design system adherence** | Correct color palette, fonts (Fraunces/Inter/IBM Plex Mono), and layout conventions (sidebar, cards, tag pills, modals) as specified in 3.0. |
+| **Git hygiene** | Commit history tells a story of how you worked. |
+| **Documentation** | Can we run it from the README alone? |
+| **Judgment** | Sensible scoping given the time budget - we'd rather see a smaller feature set done well than everything done poorly. |
+
+<!-- AREA - Functional correctness
+What we're looking for - Do CRUD flows, scheduling logic, and auth actually work end-to-end?
+
+AREA - Auth & authorization
+What we're looking for - Passwords hashed, tokens handled correctly, roles genuinely enforced (not just hidden in UI)
+
+AREA - Code quality & structure
+What we're looking for - Readable FastAPI project structure, sensible Next.js app organization, separation of concerns
+
+AREA - API design
+What we're looking for - RESTful conventions, Pydantic validation, sensible status codes, error handling
+
+AREA - Data modeling
+What we're looking for - Sensible PostgreSQL schema, relationships, no obvious data-integrity gaps
+
+AREA - Frontend integration
+What we're looking for - UI reflects real backend state, handles loading/error/auth states
+
+AREA - Design system adherence
+What we're looking for - Correct color palette, fonts (Fraunces/Inter/IBM Plex Mono), and layout conventions (sidebar, cards, tag pills, modals) as specified in 3.0
+
+AREA - Git hygiene
+What we're looking for - Commit history tells a story of how you worked
+
+AREA - Documentation
+What we're looking for - Can we run it from the README alone?
+
+AREA - Judgment
+What we're looking for - Sensible scoping given the time budget - we'd rather see a smaller feature set done well than everything done poorly -->
+
+We are not grading pixel-perfect design polish or animation flourishes - but the palette, fonts, and layout conventions above are a fixed requirement, not a suggestion.
+---
+
+## 7. Bonus (fully optional, do not sacrifice core requirements for these)
+    1. Pagination or infinite scroll on large lists
+    2. Unit or integration tests for at least one core module (backend and/or frontend)
+    3. Dockerized setup (docker-compose up to run Postgres + backend + frontend together)
+    4. Conflict prevention UX (e.g. warning before double-booking)
+    5. Refresh-token rotation / logout-everywhere handling
+---
+
+## 8. Questions
+
+If anything is ambiguous, make a reasonable assumption, document it in your README, and move on - how you handle ambiguity is itself part of the evaluation. Feel free to reach out if you have any questions about the spec.
+
+Good luck - we're looking forward to seeing what you build.
