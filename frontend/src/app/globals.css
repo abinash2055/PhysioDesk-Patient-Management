@@ -1,26 +1,63 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary */
+  --primary: #b8763a;
+  --primary-text-soft: #5c3a17;
+  --primary-soft: #f0dfc7;
+
+  /* Secondary */
+  --secondary: #132420;
+  --secondary-light: #1d362f;
+
+  /* Tertiary */
+  --tertiary: #4f7c63;
+  --tertiary-soft: #e1ebe3;
+
+  /* Base */
+  --background: #f6f3ea;
+  --surface: #ffffff;
+  --border: #e4dfd1;
+
+  /* Text */
+  --text-primary: #1c2622;
+  --text-secondary: #797365;
+
+  /* Status */
+  --success: #4f7c63;
+  --success-soft: #e1ebe3;
+
+  --danger: #b5493b;
+  --danger-soft: #f3deda;
+
+  --neutral: #5e6b78;
+  --neutral-soft: #e7ebee;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text-primary);
+  font-family: var(--font-inter), sans-serif;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-fraunces), serif;
+}
+
+.mono {
+  font-family: var(--font-plex-mono), monospace;
 }
