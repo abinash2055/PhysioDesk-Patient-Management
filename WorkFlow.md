@@ -264,6 +264,9 @@ If anything is ambiguous, make a reasonable assumption, document it in your READ
 Good luck - we're looking forward to seeing what you build.
 
 
+---------------------------
+---------------------------
+---------------------------
 
 Admin
     Email : admin@physiodesk.com
@@ -273,3 +276,9 @@ Admin
 Staff
     Email : staff@physiodesk.com
     Password : Staff@123
+
+-------------------------
+-------------------------
+
+Frontend: npm run dev
+backend: uvicorn app.main:app --reload

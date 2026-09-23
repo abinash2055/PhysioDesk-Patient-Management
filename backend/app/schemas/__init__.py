@@ -4,8 +4,17 @@ from app.schemas.auth import (
     TokenResponse,
 )
 
+from app.schemas.patient import (
+    PatientCreate,
+    PatientResponse,
+    PatientUpdate,
+)
+
 __all__ = [
     "CurrentUserResponse",
     "LoginRequest",
     "TokenResponse",
+    "PatientCreate",
+    "PatientResponse",
+    "PatientUpdate",
 ]
