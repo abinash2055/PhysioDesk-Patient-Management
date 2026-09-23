@@ -10,6 +10,16 @@ from app.schemas.patient import (
     PatientUpdate,
 )
 
+from app.schemas.therapist import (
+    ScheduleCreate,
+    ScheduleOverrideCreate,
+    ScheduleOverrideResponse,
+    ScheduleResponse,
+    TherapistCreate,
+    TherapistResponse,
+    TherapistUpdate,
+)
+
 __all__ = [
     "CurrentUserResponse",
     "LoginRequest",
@@ -17,4 +27,11 @@ __all__ = [
     "PatientCreate",
     "PatientResponse",
     "PatientUpdate",
+    "TherapistCreate",
+    "TherapistUpdate",
+    "TherapistResponse",
+    "ScheduleCreate",
+    "ScheduleResponse",
+    "ScheduleOverrideCreate",
+    "ScheduleOverrideResponse",
 ]

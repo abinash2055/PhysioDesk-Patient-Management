@@ -1,4 +1,4 @@
-from datetime import time
+from datetime import time, date
 
 from sqlalchemy import Boolean, ForeignKey, Integer, String, Time
 from sqlalchemy.orm import Mapped, mapped_column
@@ -9,7 +9,10 @@ from app.db.session import Base
 class Therapist(Base):
     __tablename__ = "therapists"
 
-    id: Mapped[int] = mapped_column(primary_key=True, index=True)
+    id: Mapped[int] = mapped_column(
+        primary_key=True,
+        index=True,
+    )
 
     name: Mapped[str] = mapped_column(
         String(150),
@@ -25,16 +28,23 @@ class Therapist(Base):
         Boolean,
         nullable=False,
         default=True,
+        index=True,
     )
 
 
 class TherapistSchedule(Base):
     __tablename__ = "therapist_schedules"
 
-    id: Mapped[int] = mapped_column(primary_key=True, index=True)
+    id: Mapped[int] = mapped_column(
+        primary_key=True,
+        index=True,
+    )
 
     therapist_id: Mapped[int] = mapped_column(
-        ForeignKey("therapists.id", ondelete="CASCADE"),
+        ForeignKey(
+            "therapists.id",
+            ondelete="CASCADE",
+        ),
         nullable=False,
         index=True,
     )
@@ -58,4 +68,48 @@ class TherapistSchedule(Base):
         Integer,
         nullable=False,
         default=30,
+    )
+
+
+class TherapistScheduleOverride(Base):
+    __tablename__ = "therapist_schedule_overrides"
+
+    id: Mapped[int] = mapped_column(
+        primary_key=True,
+        index=True,
+    )
+
+    therapist_id: Mapped[int] = mapped_column(
+        ForeignKey(
+            "therapists.id",
+            ondelete="CASCADE",
+        ),
+        nullable=False,
+        index=True,
+    )
+
+    override_date: Mapped[date] = mapped_column(
+        nullable=False,
+        index=True,
+    )
+
+    is_day_off: Mapped[bool] = mapped_column(
+        Boolean,
+        nullable=False,
+        default=False,
+    )
+
+    start_time: Mapped[time | None] = mapped_column(
+        Time,
+        nullable=True,
+    )
+
+    end_time: Mapped[time | None] = mapped_column(
+        Time,
+        nullable=True,
+    )
+
+    slot_duration: Mapped[int | None] = mapped_column(
+        Integer,
+        nullable=True,
     )

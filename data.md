@@ -1,11 +1,14 @@
 Admin
-    Email : admin@physiodesk.com
-    Password : Admin@123
-
+{
+  "email": "admin@physiodesk.com",
+  "password": "Admin@123"
+}
 
 Staff
-    Email : staff@physiodesk.com
-    Password : Staff@123
+{
+  "email": "staff@physiodesk.com",
+  "password": "Staff@123"
+}
 
 -------------------------
 -------------------------
@@ -14,7 +17,7 @@ Frontend: npm run dev
 backend: uvicorn app.main:app --reload
 
 
-Patient Data
+## Patient Data
 
 1. 
 {
@@ -27,6 +30,7 @@ Patient Data
   "therapist_id": null,
   "package": "10 Sessions"
 }
+---
 
 2. 
 {
@@ -39,6 +43,7 @@ Patient Data
   "therapist_id": null,
   "package": "8 Sessions"
 }
+---
 
 3. 
 {
@@ -51,6 +56,7 @@ Patient Data
   "therapist_id": null,
   "package": "12 Sessions"
 }
+---
 
 4. 
 {
@@ -62,4 +68,20 @@ Patient Data
   "condition": "Neck problem",
   "therapist_id": null,
   "package": "12 Sessions"
+}
+---
+---
+
+
+## Therapists Data
+1. 
+{
+  "name": "Dr. Priya Sharma",
+  "specialty": "Orthopedic Physiotherapy"
+}
+
+2. 
+{
+  "name": "Dr. Rohan Thapa",
+  "specialty": "Sports Physiotherapy"
 }
