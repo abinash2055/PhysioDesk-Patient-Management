@@ -27,7 +27,7 @@ The UI must follow this design system exactly - do not substitute your own color
 # 3.2. Color Palette
 
 ## Color Palette
-
+<!-- 
 | Role | HEX | Usages |
 |---|---|---|
 | **Primary** | `#B8763A` | Primary buttons, active nav item, key highlights/CTAs |
@@ -44,9 +44,10 @@ The UI must follow this design system exactly - do not substitute your own color
 | **Text - Secondary (muted)** | `#797365` | Supporting/secondary text, captions |
 | **Status - Success** | `#4F7C63`<br>Soft: `#E1EBE3` | Paid, active, booked/positive states |
 | **Status - Error/Danger** | `#B5493B`<br>Soft: `#F3DEDA` | Overdue, cancelled, destructive actions |
-| **Status - Neutral/Info** | `#5E6B78`<br>Soft: `#E7EBEE` | Pending, on-hold, informational states |
+| **Status - Neutral/Info** | `#5E6B78`<br>Soft: `#E7EBEE` | Pending, on-hold, informational states | -->
 
-<!-- ROLE:   Primary                     
+
+ROLE:   Primary                     
 HEX:    #B8763A   
 USAGES: Primary buttons, active nav item, key highlights/CTAs  
 
@@ -104,7 +105,8 @@ USAGES: Overdue, cancelled, destructive actions
 
 ROLE:   Status - Neutral/Info       
 HEX:    #5E6B78 (soft: #E7EBEE)
-USAGES: Pending, on-hold, informational states -->
+USAGES: Pending, on-hold, informational states
+
 
 Use the "Primary/Secondary/Tertiary" roles for structural UI (buttons, nav, backgrounds) and the "Status" roles only for status tags/badges - don't mix the two systems.
 ---
@@ -202,7 +204,7 @@ Ability to override/assign a therapist-s schedule for a specific date (day off, 
 ## 6. Evaluation Criteria
 
 ## Evaluation Criteria
-
+<!-- 
 | Area | What We're Looking For |
 |---|---|
 | **Functional correctness** | Do CRUD flows, scheduling logic, and auth actually work end-to-end? |
@@ -214,9 +216,9 @@ Ability to override/assign a therapist-s schedule for a specific date (day off, 
 | **Design system adherence** | Correct color palette, fonts (Fraunces/Inter/IBM Plex Mono), and layout conventions (sidebar, cards, tag pills, modals) as specified in 3.0. |
 | **Git hygiene** | Commit history tells a story of how you worked. |
 | **Documentation** | Can we run it from the README alone? |
-| **Judgment** | Sensible scoping given the time budget - we'd rather see a smaller feature set done well than everything done poorly. |
+| **Judgment** | Sensible scoping given the time budget - we'd rather see a smaller feature set done well than everything done poorly. | -->
 
-<!-- AREA - Functional correctness
+AREA - Functional correctness
 What we're looking for - Do CRUD flows, scheduling logic, and auth actually work end-to-end?
 
 AREA - Auth & authorization
@@ -244,7 +246,8 @@ AREA - Documentation
 What we're looking for - Can we run it from the README alone?
 
 AREA - Judgment
-What we're looking for - Sensible scoping given the time budget - we'd rather see a smaller feature set done well than everything done poorly -->
+What we're looking for - Sensible scoping given the time budget - we'd rather see a smaller feature set done well than everything done poorly
+
 
 We are not grading pixel-perfect design polish or animation flourishes - but the palette, fonts, and layout conventions above are a fixed requirement, not a suggestion.
 ---

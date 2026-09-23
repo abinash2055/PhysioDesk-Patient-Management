@@ -83,5 +83,11 @@ backend: uvicorn app.main:app --reload
 2. 
 {
   "name": "Dr. Rohan Thapa",
-  "specialty": "Sports Physiotherapy"
+  "specialty": "Physiotherapy"
+}
+
+3. 
+{
+  "name": "Dr. Abinash Pandey",
+  "specialty": "Cardiology"
 }
