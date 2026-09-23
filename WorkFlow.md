@@ -262,3 +262,14 @@ We are not grading pixel-perfect design polish or animation flourishes - but the
 If anything is ambiguous, make a reasonable assumption, document it in your README, and move on - how you handle ambiguity is itself part of the evaluation. Feel free to reach out if you have any questions about the spec.
 
 Good luck - we're looking forward to seeing what you build.
+
+
+
+Admin
+    Email : admin@physiodesk.com
+    Password : Admin@123
+
+
+Staff
+    Email : staff@physiodesk.com
+    Password : Staff@123
