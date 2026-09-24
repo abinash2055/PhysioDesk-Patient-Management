@@ -91,3 +91,29 @@ backend: uvicorn app.main:app --reload
   "name": "Dr. Abinash Pandey",
   "specialty": "Cardiology"
 }
+---
+---
+
+
+## Billing Data
+1. 
+{
+  "patient_id": 1,
+  "service": "Physiotherapy Session",
+  "amount": 1500.00,
+  "discount": 100.00,
+  "status": "Due",
+  "payment_method": null,
+  "invoice_date": "2026-09-24"
+}
+
+2. 
+{
+  "patient_id": 1,
+  "service": "Physiotherapy ECG",
+  "amount": 1200.00,
+  "discount": 800.00,
+  "status": "Paid",
+  "payment_method": null,
+  "invoice_date": "2026-09-25"
+}

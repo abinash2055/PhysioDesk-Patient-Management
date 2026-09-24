@@ -38,6 +38,7 @@ class Invoice(Base):
         String(30),
         nullable=False,
         default="Due",
+        index=True,
     )
 
     payment_method: Mapped[str | None] = mapped_column(
@@ -48,6 +49,7 @@ class Invoice(Base):
     invoice_date: Mapped[date] = mapped_column(
         Date,
         nullable=False,
+        index=True,
     )
 
     created_at: Mapped[datetime] = mapped_column(
