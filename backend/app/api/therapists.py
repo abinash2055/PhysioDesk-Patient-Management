@@ -351,3 +351,64 @@ def get_schedule_overrides(
 
     return result.scalars().all()
 
+
+@router.delete(
+        "/{therapist_id}/schedule/{schedule_id}"
+)
+
+def delete_schedule(
+    therapist_id: int,
+    schedule_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_admin),
+):
+    schedule = (
+        db.query(TherapistSchedule)
+        .filter(
+            TherapistSchedule.id == schedule_id,
+            TherapistSchedule.therapist_id == therapist_id,
+        )
+        .first()
+    )
+
+    if not schedule:
+        raise HTTPException(
+            status_code=404,
+            detail="Schedule not found",
+        )
+
+    db.delete(schedule)
+    db.commit()
+
+    return {"message": "Schedule removed successfully"}
+
+
+@router.delete(
+    "/{therapist_id}/overrides/{override_id}"
+)
+
+def delete_schedule_override(
+    therapist_id: int,
+    override_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_admin),
+):
+    override = (
+        db.query(TherapistScheduleOverride)
+        .filter(
+            TherapistScheduleOverride.id == override_id,
+            TherapistScheduleOverride.therapist_id == therapist_id,
+        )
+        .first()
+    )
+
+    if not override:
+        raise HTTPException(
+            status_code=404,
+            detail="Schedule override not found",
+        )
+
+    db.delete(override)
+    db.commit()
+
+    return {"message": "Schedule override removed successfully"}

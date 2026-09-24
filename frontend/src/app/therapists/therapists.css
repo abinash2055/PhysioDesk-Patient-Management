@@ -1,0 +1,370 @@
+.therapists-page {
+    width: 100%;
+}
+
+.therapist-layout {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.8fr) minmax(500px, 1.7fr);
+    gap: 20px;
+    align-items: start;
+}
+
+.therapist-list-card {
+    min-height: 500px;
+}
+
+.therapist-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.therapist-list-item {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid var(--border);
+    background: transparent;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.therapist-list-item:hover {
+    background: var(--background);
+}
+
+.therapist-list-item.selected {
+    background: var(--primary-soft);
+}
+
+.therapist-avatar {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+    border-radius: 50%;
+    background: var(--tertiary-soft);
+    color: var(--secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.therapist-avatar.large {
+    width: 52px;
+    height: 52px;
+    flex-basis: 52px;
+    font-size: 14px;
+}
+
+.therapist-list-content {
+    min-width: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.therapist-list-content strong {
+    color: var(--text-primary);
+    font-size: 14px;
+}
+
+.therapist-list-content span {
+    color: var(--text-secondary);
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.therapist-detail-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(28, 38, 34, 0.04);
+    min-height: 500px;
+    overflow: hidden;
+}
+
+.therapist-detail-empty {
+    min-height: 500px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.therapist-detail-empty svg {
+    color: var(--tertiary);
+    margin-bottom: 14px;
+}
+
+.therapist-detail-empty h2 {
+    margin: 0 0 7px;
+    color: var(--text-primary);
+    font-family: "Fraunces", serif;
+    font-size: 22px;
+}
+
+.therapist-detail-empty p {
+    margin: 0;
+    max-width: 380px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.therapist-detail-header {
+    padding: 22px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+}
+
+.therapist-detail-person {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-width: 0;
+}
+
+.therapist-name-line {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    flex-wrap: wrap;
+}
+
+.therapist-name-line h2 {
+    margin: 0;
+    color: var(--text-primary);
+    font-family: "Fraunces", serif;
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.therapist-detail-person p {
+    margin: 4px 0 0;
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+.therapist-detail-body {
+    padding: 22px;
+}
+
+.detail-section+.detail-section {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid var(--border);
+}
+
+.detail-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.detail-section-header h3 {
+    margin: 0;
+    color: var(--text-primary);
+    font-family: "Fraunces", serif;
+    font-size: 18px;
+}
+
+.detail-section-header p {
+    margin: 4px 0 0;
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.schedule-day {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 13px;
+    background: var(--background);
+    min-height: 105px;
+}
+
+.schedule-day.configured {
+    background: var(--surface);
+}
+
+.schedule-day-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.schedule-day-top strong {
+    font-size: 13px;
+    color: var(--text-primary);
+}
+
+.schedule-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--tertiary);
+}
+
+.schedule-time {
+    display: block;
+    margin-top: 12px;
+    color: var(--text-primary);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+}
+
+.schedule-duration {
+    display: block;
+    margin-top: 5px;
+    color: var(--text-secondary);
+    font-size: 11px;
+}
+
+.schedule-off {
+    display: block;
+    margin-top: 18px;
+    color: var(--text-secondary);
+    font-size: 11px;
+}
+
+.schedule-day .text-danger-button {
+    margin-top: 8px;
+}
+
+.override-list {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.override-row {
+    display: grid;
+    grid-template-columns: minmax(150px, 1fr) minmax(150px, 1fr) auto;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+.override-row:last-child {
+    border-bottom: 0;
+}
+
+.override-date strong {
+    font-size: 13px;
+    color: var(--text-primary);
+}
+
+.override-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--text-primary);
+}
+
+.checkbox-field {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 13px;
+    color: var(--text-primary);
+    cursor: pointer;
+}
+
+.checkbox-field input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary);
+}
+
+/* Small button variants */
+
+.primary-button.small,
+.secondary-button.small {
+    min-height: 34px;
+    padding: 7px 11px;
+    font-size: 12px;
+}
+
+/* Therapist responsive layout */
+
+@media (max-width: 1050px) {
+    .therapist-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .therapist-list-card {
+        min-height: auto;
+    }
+
+    .therapist-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .therapist-list-item {
+        border-right: 1px solid var(--border);
+    }
+}
+
+@media (max-width: 700px) {
+    .therapist-detail-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .therapist-detail-header .table-actions {
+        width: 100%;
+    }
+
+    .therapist-detail-header .secondary-button {
+        flex: 1;
+    }
+
+    .therapist-list {
+        grid-template-columns: 1fr;
+    }
+
+    .schedule-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .override-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .override-row .text-danger-button {
+        justify-self: start;
+    }
+
+    .detail-section-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

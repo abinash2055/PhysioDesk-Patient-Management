@@ -23,6 +23,15 @@ Open Terminal and type
 -------------------------
 -------------------------
 
+## Frontend Issue Checking
+
+Open Terminal under frontend folder and type
+    "git run lint"
+  --> If you get errors, resolve it all.
+
+-------------------------
+-------------------------
+
 Frontend: npm run dev
 backend: uvicorn app.main:app --reload
 
