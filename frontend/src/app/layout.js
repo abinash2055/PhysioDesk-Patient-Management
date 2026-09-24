@@ -1,7 +1,12 @@
 import {
-  Fraunces, Inter, IBM_Plex_Mono
+  Fraunces,
+  Inter,
+  IBM_Plex_Mono,
 } from "next/font/google";
+
 import "./globals.css";
+
+import { AuthProvider } from "@/context/AuthContext";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -21,8 +26,9 @@ const plexMono = IBM_Plex_Mono({
 
 export const metadata = {
   title: "PhysioDesk",
-  description: "Physiotherapy clinic management system",
+  description: "Physiotherapy Clinic Management",
 };
+
 
 export default function RootLayout({ children }) {
   return (
@@ -30,7 +36,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${fraunces.variable} ${inter.variable} ${plexMono.variable}`}
       >
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
