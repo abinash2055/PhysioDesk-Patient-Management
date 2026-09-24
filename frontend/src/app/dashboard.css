@@ -1,196 +1,514 @@
-
-.app-shell {
-  min-height: 100vh;
-  background: var(--background);
-}
-
-.main-content {
-  margin-left: 250px;
-  min-height: 100vh;
-  padding: 34px;
-}
-
-.page-header {
-  margin-bottom: 28px;
-}
-
-.page-header .eyebrow {
-  margin: 0 0 6px;
-  font-family: var(--font-plex-mono);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--primary);
-}
-
-.page-header h1 {
-  margin: 0;
-  font-family: var(--font-fraunces);
-  font-size: 34px;
-  color: var(--text-primary);
-}
-
-.page-header > div > p:last-child {
-  margin: 7px 0 0;
-  color: var(--text-secondary);
-  font-size: 14px;
-}
-
-.stat-grid {
-  display: grid;
-  grid-template-columns:
-    repeat(4, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.stat-card {
+.dashboard-page {
   display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.dashboard-date {
+  display: inline-flex;
   align-items: center;
-  gap: 14px;
-  padding: 20px;
+  gap: 8px;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
   background: var(--surface);
+  color: var(--text-secondary);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+}
+
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.dashboard-stat-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  min-width: 0;
+  padding: 17px;
   border: 1px solid var(--border);
   border-radius: 14px;
+  background: var(--surface);
+  box-shadow: 0 3px 14px rgba(28, 38, 34, 0.04);
 }
 
-.stat-icon {
-  width: 42px;
-  height: 42px;
-  flex-shrink: 0;
+.dashboard-stat-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 11px;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
   background: var(--primary-soft);
-  color: var(--primary-text);
+  color: var(--primary);
 }
 
-.stat-card span {
+.dashboard-stat-icon.green {
+  background: var(--tertiary-soft);
+  color: var(--tertiary);
+}
+
+.dashboard-stat-icon.gold {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.dashboard-stat-icon.neutral {
+  background: var(--neutral-soft);
+  color: var(--neutral);
+}
+
+.dashboard-stat-card span {
   display: block;
+  margin-bottom: 5px;
   color: var(--text-secondary);
   font-size: 12px;
-  margin-bottom: 5px;
 }
 
-.stat-card strong {
+.dashboard-stat-card strong {
   display: block;
-  font-family: var(--font-plex-mono);
-  font-size: 22px;
   color: var(--text-primary);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 23px;
+  line-height: 1.25;
 }
 
-.dashboard-section {
-  margin-top: 28px;
-}
-
-.section-heading {
-  margin-bottom: 12px;
-}
-
-.section-heading h2 {
-  margin: 0;
-  font-family: var(--font-fraunces);
-  font-size: 21px;
-  color: var(--text-primary);
-}
-
-.section-heading p {
-  margin: 4px 0 0;
+.dashboard-stat-card small {
+  display: block;
+  margin-top: 5px;
   color: var(--text-secondary);
-  font-size: 13px;
+  font-size: 11px;
 }
 
-.data-card {
-  background: var(--surface);
+.mono-value {
+  font-family: "IBM Plex Mono", monospace !important;
+}
+
+.dashboard-main-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(320px, 0.9fr);
+  gap: 16px;
+}
+
+.dashboard-bottom-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  gap: 16px;
+}
+
+.dashboard-card {
+  min-width: 0;
+  overflow: hidden;
   border: 1px solid var(--border);
   border-radius: 14px;
-  overflow: hidden;
+  background: var(--surface);
+  box-shadow: 0 3px 14px rgba(28, 38, 34, 0.04);
 }
 
-.capacity-list,
-.patient-list {
+.dashboard-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 17px 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.dashboard-card-header h2 {
+  margin: 0 0 4px;
+  color: var(--text-primary);
+  font-family: "Fraunces", serif;
+  font-size: 19px;
+}
+
+.dashboard-card-header p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.dashboard-link {
+  flex-shrink: 0;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.dashboard-link:hover {
+  text-decoration: underline;
+}
+
+.dashboard-appointment-list {
   display: flex;
   flex-direction: column;
 }
 
-.capacity-row,
-.patient-row {
-  min-height: 70px;
-  padding: 15px 20px;
-  display: flex;
+.dashboard-appointment-row {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
+  gap: 15px;
+  padding: 14px 18px;
   border-bottom: 1px solid var(--border);
 }
 
-.capacity-row:last-child,
-.patient-row:last-child {
-  border-bottom: 0;
+.dashboard-appointment-row:last-child {
+  border-bottom: none;
 }
 
-.capacity-row strong,
-.patient-row strong {
-  display: block;
-  font-size: 14px;
+.appointment-time {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.appointment-time strong {
   color: var(--text-primary);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
 }
 
-.capacity-row span,
-.patient-row span {
-  display: block;
-  margin-top: 4px;
+.appointment-time span {
+  color: var(--text-secondary);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+}
+
+.appointment-person {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.appointment-person strong {
+  overflow: hidden;
+  color: var(--text-primary);
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.appointment-person span {
+  overflow: hidden;
+  color: var(--text-secondary);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dashboard-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 5px 9px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.dashboard-status.booked {
+  background: var(--primary-soft);
+  color: var(--primary-text-on-soft);
+}
+
+.dashboard-status.confirmed {
+  background: var(--tertiary-soft);
+  color: var(--tertiary);
+}
+
+.dashboard-status.completed {
+  background: var(--tertiary-soft);
+  color: var(--tertiary);
+}
+
+.dashboard-status.cancelled {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.capacity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+  padding: 18px;
+}
+
+.capacity-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.capacity-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.capacity-heading>div {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.capacity-heading strong {
+  overflow: hidden;
+  color: var(--text-primary);
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.capacity-heading span {
+  overflow: hidden;
+  color: var(--text-secondary);
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.capacity-heading b {
+  flex-shrink: 0;
+  color: var(--text-secondary);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+}
+
+.capacity-track {
+  height: 7px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--background);
+}
+
+.capacity-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--primary);
+  transition: width 250ms ease;
+}
+
+.capacity-open {
+  color: var(--text-secondary);
+  font-size: 10px;
+}
+
+.recent-patient-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.recent-patient-row {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 11px;
+  padding: 13px 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.recent-patient-row:last-child {
+  border-bottom: none;
+}
+
+.patient-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--primary-soft);
+  color: var(--primary-text-on-soft);
+  font-family: "Fraunces", serif;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.recent-patient-row>div:nth-child(2) {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.recent-patient-row strong {
+  overflow: hidden;
+  color: var(--text-primary);
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recent-patient-row span {
+  overflow: hidden;
+  color: var(--text-secondary);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recent-patient-row small {
+  color: var(--text-secondary);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.overview-list {
+  display: flex;
+  flex-direction: column;
+  padding: 6px 18px;
+}
+
+.overview-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.overview-row:last-child {
+  border-bottom: none;
+}
+
+.overview-label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
   color: var(--text-secondary);
   font-size: 12px;
 }
 
-.capacity-numbers {
+.overview-label svg {
+  color: var(--tertiary);
+}
+
+.overview-row strong {
+  color: var(--text-primary);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+}
+
+.dashboard-empty {
   display: flex;
-  gap: 20px;
-}
-
-.capacity-numbers span {
-  font-family: var(--font-plex-mono);
-}
-
-.status-pill {
-  display: inline-flex !important;
   align-items: center;
-  padding: 5px 9px;
-  border-radius: 999px;
-  background: var(--tertiary-soft);
-  color: var(--tertiary) !important;
-  font-size: 11px !important;
-  font-weight: 600;
-}
-
-.empty-state {
-  padding: 35px 20px;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 210px;
+  padding: 25px;
   text-align: center;
   color: var(--text-secondary);
-  font-size: 14px;
+}
+
+.dashboard-empty svg {
+  margin-bottom: 9px;
+}
+
+.dashboard-empty h3 {
+  margin: 0 0 5px;
+  color: var(--text-primary);
+  font-family: "Fraunces", serif;
+  font-size: 17px;
+}
+
+.dashboard-empty p {
+  margin: 0;
+  max-width: 300px;
+  font-size: 12px;
+}
+
+.dashboard-empty.compact {
+  min-height: 150px;
+}
+
+.dashboard-error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 12px 14px;
+  border: 1px solid #e7c2bc;
+  border-radius: 10px;
+  background: var(--danger-soft);
+  color: var(--danger);
+  font-size: 13px;
 }
 
 .dashboard-loading {
-  padding: 30px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 350px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
   color: var(--text-secondary);
+  font-size: 13px;
 }
+
+/* Dashboard responsive */
 
 @media (max-width: 1100px) {
-  .stat-grid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 760px) {
-  .main-content {
-    margin-left: 0;
-    padding: 20px;
+  .dashboard-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .stat-grid {
+  .dashboard-main-grid,
+  .dashboard-bottom-grid {
     grid-template-columns: 1fr;
   }
 }
 
+@media (max-width: 650px) {
+  .dashboard-header {
+    flex-direction: column;
+  }
+
+  .dashboard-date {
+    width: fit-content;
+  }
+
+  .dashboard-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-appointment-row {
+    grid-template-columns: 75px minmax(0, 1fr);
+  }
+
+  .dashboard-appointment-row .dashboard-status {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .dashboard-card-header {
+    padding: 15px;
+  }
+
+  .dashboard-appointment-row,
+  .recent-patient-row {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}

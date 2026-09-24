@@ -1,0 +1,3 @@
+# Invoice Assumption;:
+
+For dashboard revenue reporting, a Paid invoice is counted against its invoice_date because the current invoice model does not store a separate payment timestamp...
