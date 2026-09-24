@@ -1,13 +1,20 @@
+"use client";
+
 import Sidebar from "./Sidebar";
+import ProtectedRoute from "./ProtectedRoute";
 
-export default function AppShell({ children }) {
+export default function AppShell({
+  children,
+}) {
   return (
-    <div className="min-h-screen bg-[var(--background)]">
-      <Sidebar />
+    <ProtectedRoute>
+      <div className="app-shell">
+        <Sidebar />
 
-      <main className="ml-64 min-h-screen">
-        {children}
-      </main>
-    </div>
+        <main className="main-content">
+          {children}
+        </main>
+      </div>
+    </ProtectedRoute>
   );
 }

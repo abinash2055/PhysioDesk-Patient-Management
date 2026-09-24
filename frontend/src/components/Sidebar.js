@@ -2,7 +2,18 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Users, CalendarDays, Receipt, Stethoscope } from "lucide-react";
+
+import {
+    Activity,
+    CalendarDays,
+    CreditCard,
+    LayoutDashboard,
+    LogOut,
+    Users,
+    UserRoundCog,
+} from "lucide-react";
+
+import { useAuth } from "@/context/AuthContext";
 
 const navigation = [
     {
@@ -23,62 +34,102 @@ const navigation = [
     {
         name: "Billing",
         href: "/billing",
-        icon: Receipt,
+        icon: CreditCard,
     },
     {
         name: "Therapists",
         href: "/therapists",
-        icon: Stethoscope,
+        icon: UserRoundCog,
+        adminOnly: true,
     },
 ];
 
 export default function Sidebar() {
     const pathname = usePathname();
+    const { user, logout } = useAuth();
 
     return (
-        <aside className="fixed left-0 top-0 flex h-screen w-64 flex-col bg-[var(--secondary)] text-white">
-            <div className="border-b border-white/10 px-6 py-6">
-                <h1 className="font-[var(--font-fraunces)] text-2xl font-semibold">
-                    PhysioDesk
-                </h1>
+        <aside className="sidebar">
+            <div className="sidebar-brand">
+                <div className="sidebar-logo">
+                    <Activity size={21} />
+                </div>
 
-                <p className="mt-1 text-sm text-white/50">
-                    Clinic Management
-                </p>
+                <div>
+                    <h1>PhysioDesk</h1>
+                    <span>Clinic Management</span>
+                </div>
             </div>
 
-            <nav className="flex-1 px-3 py-5">
-                <div className="space-y-1">
-                    {navigation.map((item) => {
+            <nav className="sidebar-nav">
+                <span className="sidebar-label">
+                    Workspace
+                </span>
+
+                {navigation
+                    .filter(
+                        (item) =>
+                            !item.adminOnly ||
+                            user?.role === "ADMIN"
+                    )
+                    .map((item) => {
                         const Icon = item.icon;
-                        const isActive =
-                            item.href === "/"
-                                ? pathname === "/"
-                                : pathname.startsWith(item.href);
+
+                        const active =
+                            pathname === item.href ||
+                            (
+                                item.href !== "/" &&
+                                pathname.startsWith(
+                                    item.href
+                                )
+                            );
+
                         return (
                             <Link
                                 key={item.href}
                                 href={item.href}
-                                className={`flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition ${isActive
-                                        ? "bg-[var(--primary)] text-white"
-                                        : "text-white/70 hover:bg-[var(--secondary-light)] hover:text-white"
-                                    }`}
+                                className={
+                                    active
+                                        ? "sidebar-link active"
+                                        : "sidebar-link"
+                                }
                             >
-                                <Icon size={19} strokeWidth={1.8} />
+                                <Icon size={18} />
                                 <span>{item.name}</span>
                             </Link>
                         );
                     })}
-                </div>
             </nav>
 
-            <div className="border-t border-white/10 px-6 py-5">
-                <p className="text-xs text-white/40">
-                    PhysioDesk
-                </p>
-                <p className="mt-1 text-sm text-white/70">
-                    Clinic Management
-                </p>
+            <div className="sidebar-footer">
+                <div className="sidebar-user">
+                    <div className="sidebar-avatar">
+                        {user?.email
+                            ?.charAt(0)
+                            .toUpperCase()}
+                    </div>
+
+                    <div>
+                        <strong>
+                            {user?.role === "ADMIN"
+                                ? "Administrator"
+                                : "Staff"}
+                        </strong>
+
+                        <span>
+                            {user?.email}
+                        </span>
+                    </div>
+                </div>
+
+                <button
+                    type="button"
+                    className="logout-button"
+                    onClick={logout}
+                >
+                    <LogOut size={17} />
+                    <span>Sign out</span>
+                </button>
             </div>
         </aside>
     );
