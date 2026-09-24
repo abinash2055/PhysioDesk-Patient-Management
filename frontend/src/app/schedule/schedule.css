@@ -1,0 +1,432 @@
+.schedule-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.eyebrow {
+  margin: 0 0 5px;
+  color: var(--primary);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.page-subtitle {
+  margin: 7px 0 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.schedule-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: 0 3px 14px rgba(28, 38, 34, 0.04);
+}
+
+.schedule-date-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.schedule-current-date {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--text-primary);
+  font-size: 15px;
+}
+
+.today-button {
+  min-width: 70px;
+}
+
+.schedule-error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 14px;
+  border: 1px solid #e7c2bc;
+  border-radius: 10px;
+  background: var(--danger-soft);
+  color: var(--danger);
+  font-size: 14px;
+}
+
+.schedule-error .small {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+}
+
+.schedule-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.schedule-summary-card {
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: 0 3px 14px rgba(28, 38, 34, 0.04);
+}
+
+.schedule-summary-card span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.schedule-summary-card strong {
+  color: var(--text-primary);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 24px;
+}
+
+.schedule-card {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: 0 3px 14px rgba(28, 38, 34, 0.04);
+}
+
+.schedule-grid {
+  display: grid;
+  grid-template-columns: 82px repeat(
+    auto-fit,
+    minmax(210px, 1fr)
+  );
+  min-width: 930px;
+}
+
+.schedule-time-column,
+.therapist-column {
+  min-width: 0;
+}
+
+.schedule-time-column {
+  border-right: 1px solid var(--border);
+  background: #faf8f2;
+}
+
+.schedule-corner,
+.therapist-column-header {
+  height: 88px;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--border);
+}
+
+.schedule-corner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.schedule-time-cell {
+  height: 60px;
+  box-sizing: border-box;
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  text-align: center;
+}
+
+.therapist-column {
+  border-right: 1px solid var(--border);
+}
+
+.therapist-column:last-child {
+  border-right: none;
+}
+
+.therapist-column-header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding: 10px 13px;
+  background: var(--surface);
+}
+
+.therapist-column-header strong {
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.therapist-column-header span {
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+.schedule-hours {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px !important;
+}
+
+.schedule-day-off-badge {
+  width: fit-content;
+  margin-top: 2px;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: var(--danger-soft);
+  color: var(--danger) !important;
+  font-size: 10px !important;
+  font-weight: 600;
+}
+
+.schedule-slot {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+}
+
+.available-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  color: transparent;
+  cursor: pointer;
+}
+
+.available-slot:hover {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.outside-hours-slot {
+  background: #f5f2eb;
+}
+
+.day-off-slot {
+  background: #f2eee7;
+}
+
+.day-off-slot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    135deg,
+    transparent,
+    transparent 8px,
+    rgba(121, 115, 101, 0.06) 8px,
+    rgba(121, 115, 101, 0.06) 9px
+  );
+}
+
+.appointment-slot {
+  display: flex;
+  align-items: stretch;
+  padding: 5px;
+  background: var(--primary-soft);
+  border-left: 3px solid var(--primary);
+  overflow: hidden;
+}
+
+.appointment-slot.status-completed {
+  background: var(--tertiary-soft);
+  border-left-color: var(--tertiary);
+}
+
+.appointment-slot.status-confirmed {
+  background: var(--tertiary-soft);
+  border-left-color: var(--tertiary);
+}
+
+.appointment-content {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  padding: 3px 4px;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  text-align: left;
+  cursor: pointer;
+}
+
+.appointment-content strong {
+  overflow: hidden;
+  color: var(--primary-text-on-soft);
+  font-size: 11px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.appointment-content span {
+  color: var(--text-secondary);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+}
+
+.appointment-content small {
+  overflow: hidden;
+  color: var(--text-secondary);
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.appointment-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.appointment-action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.65);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.appointment-action-button:hover {
+  background: var(--surface);
+  color: var(--primary);
+}
+
+.schedule-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 300px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--text-secondary);
+}
+
+.schedule-empty {
+  min-height: 250px;
+}
+
+.schedule-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  padding: 0 3px;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.schedule-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.legend-dot {
+  width: 9px;
+  height: 9px;
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.legend-dot.available {
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.legend-dot.booked {
+  background: var(--primary);
+}
+
+.legend-dot.completed {
+  background: var(--tertiary);
+}
+
+.legend-dot.outside {
+  background: #d9d4c9;
+}
+
+.legend-dot.day-off {
+  background: var(--text-secondary);
+}
+
+.schedule-booking-modal {
+  width: min(680px, calc(100vw - 32px));
+}
+
+.schedule-form-help {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 16px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--neutral-soft);
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+@media (max-width: 900px) {
+  .schedule-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .schedule-current-date {
+    order: -1;
+  }
+
+  .schedule-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .schedule-summary {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .schedule-summary-card strong {
+    font-size: 20px;
+  }
+
+  .schedule-legend {
+    gap: 10px;
+  }
+}

@@ -11,6 +11,7 @@ import {
 import AppShell from "@/components/AppShell";
 import api from "@/lib/api";
 import { useAuth } from "@/context/AuthContext";
+import "./dashboard.css"
 
 export default function DashboardPage() {
   const { user } = useAuth();

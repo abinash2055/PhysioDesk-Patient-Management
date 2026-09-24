@@ -19,7 +19,7 @@ export default function ProtectedRoute({
 
   if (loading) {
     return (
-      <div className="page-loading">
+      <div className="min-h-screen flex items-center justify-center bg-[var(--background)] text-[var(--text-secondary)] text-sm">
         Loading...
       </div>
     );

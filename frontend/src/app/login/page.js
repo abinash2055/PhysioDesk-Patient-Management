@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { LockKeyhole, Mail, Activity } from "lucide-react";
 
 import { useAuth } from "@/context/AuthContext";
+import "./login.css";
 
 export default function LoginPage() {
   const router = useRouter();
