@@ -20,6 +20,14 @@ from app.schemas.therapist import (
     TherapistUpdate,
 )
 
+from app.schemas.appointment import (
+    AppointmentCreate,
+    AppointmentResponse,
+    AppointmentUpdate,
+    AvailableSlot,
+)
+
+
 __all__ = [
     "CurrentUserResponse",
     "LoginRequest",
@@ -34,4 +42,8 @@ __all__ = [
     "ScheduleResponse",
     "ScheduleOverrideCreate",
     "ScheduleOverrideResponse",
+    "AppointmentCreate",
+    "AppointmentUpdate",
+    "AppointmentResponse",
+    "AvailableSlot",
 ]

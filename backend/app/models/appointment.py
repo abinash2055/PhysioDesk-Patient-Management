@@ -1,24 +1,39 @@
-from datetime import date, datetime, time
+from datetime import date, datetime, time, timezone
 
-from sqlalchemy import Date, DateTime, ForeignKey, String, Text, Time
+from sqlalchemy import (
+    Date,
+    DateTime,
+    ForeignKey,
+    String,
+    Text,
+)
+
 from sqlalchemy.orm import Mapped, mapped_column
-
 from app.db.session import Base
 
 
 class Appointment(Base):
     __tablename__ = "appointments"
 
-    id: Mapped[int] = mapped_column(primary_key=True, index=True)
+    id: Mapped[int] = mapped_column(
+        primary_key=True,
+        index=True,
+    )
 
     patient_id: Mapped[int] = mapped_column(
-        ForeignKey("patients.id", ondelete="CASCADE"),
+        ForeignKey(
+            "patients.id",
+            ondelete="CASCADE",
+        ),
         nullable=False,
         index=True,
     )
 
     therapist_id: Mapped[int] = mapped_column(
-        ForeignKey("therapists.id", ondelete="CASCADE"),
+        ForeignKey(
+            "therapists.id",
+            ondelete="CASCADE",
+        ),
         nullable=False,
         index=True,
     )
@@ -30,12 +45,10 @@ class Appointment(Base):
     )
 
     start_time: Mapped[time] = mapped_column(
-        Time,
         nullable=False,
     )
 
     end_time: Mapped[time] = mapped_column(
-        Time,
         nullable=False,
     )
 
@@ -43,6 +56,7 @@ class Appointment(Base):
         String(30),
         nullable=False,
         default="Booked",
+        index=True,
     )
 
     payment_method: Mapped[str | None] = mapped_column(
@@ -55,8 +69,13 @@ class Appointment(Base):
         nullable=True,
     )
 
+    session_type: Mapped[str | None] = mapped_column(
+        String(100),
+        nullable=True,
+    )
+
     created_at: Mapped[datetime] = mapped_column(
-        DateTime,
-        default=datetime.utcnow,
+        DateTime(timezone=True),
+        default=lambda: datetime.now(timezone.utc),
         nullable=False,
     )
