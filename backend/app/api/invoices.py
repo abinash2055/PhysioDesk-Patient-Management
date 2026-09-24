@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 from app.api.dependencies import get_current_user
 from app.db.session import get_db
 from app.models.invoice import Invoice
+from app.models.user import User
 from app.models.patient import Patient
 from app.schemas.invoice import (
     InvoiceCreate,
@@ -306,23 +307,24 @@ def mark_invoice_paid(
 def void_invoice(
     invoice_id: int,
     db: Session = Depends(get_db),
-    current_user=Depends(get_current_user),
+    current_user: User = Depends(get_current_user),
 ):
-    invoice = db.get(
-        Invoice,
-        invoice_id,
+    invoice = (
+        db.query(Invoice)
+        .filter(Invoice.id == invoice_id)
+        .first()
     )
 
-    if invoice is None:
+    if not invoice:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Invoice not found",
+            status_code=400,
+            detail="Invoice not found."
         )
 
     if invoice.status == "Voided":
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Invoice is already voided",
+            status_code=400,
+            detail="Invoice is already voided."
         )
 
     invoice.status = "Voided"
