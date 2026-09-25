@@ -17,12 +17,10 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "*"
         "http://localhost:3000",
         "http://127.0.0.1:3000",
         "https://physio-desk-patient-management.vercel.app",
-        "https://physio-desk-patient-management.vercel.app/",
-        "https://physio-desk-patient-management.vercel.app/login",
+        "https://physio-desk-patient-ma-git-1f36c3-abinash-nath-pandeys-projects.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
