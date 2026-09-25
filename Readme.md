@@ -3,6 +3,7 @@
 A full-stack clinic management application for physiotherapy practices.
 
 PhysioDesk provides Authentication, Patient Management, Therapist Scheduling, Appointment Booking, Billing and Dashboard reporting through a FastAPI backend, PostgresSQL Database and Next.JS frontend.
+
 ---
 
 ## Features
