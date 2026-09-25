@@ -391,10 +391,40 @@
 
 .schedule-day {
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius: 0;
     padding: 13px;
     background: var(--background);
     min-height: 105px;
+}
+
+/* Round the outer corners of the 2-column day block so it reads as one card.
+   Grid order: Mon(1) Tue(2) / Wed(3) Thu(4) / Fri(5) Sat(6) / Sun(7) */
+
+/* Monday - top-left corner */
+.schedule-day:nth-child(1) {
+    border-radius: 10px 0 0 0;
+}
+
+/* Tuesday - top-right corner */
+.schedule-day:nth-child(2) {
+    border-radius: 0 10px 0 0;
+}
+
+/* Wednesday, Friday - left edge, round bottom-left */
+.schedule-day:nth-child(3),
+.schedule-day:nth-child(5) {
+    border-radius: 0 0 0 10px;
+}
+
+/* Thursday, Saturday - right edge, round bottom-right */
+.schedule-day:nth-child(4),
+.schedule-day:nth-child(6) {
+    border-radius: 0 0 10px 0;
+}
+
+/* Sunday - bottom corners (last cell) */
+.schedule-day:nth-child(7) {
+    border-radius: 0 0 10px 10px;
 }
 
 .schedule-day.configured {

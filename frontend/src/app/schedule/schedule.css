@@ -370,11 +370,15 @@
 }
 
 .schedule-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 930px;
+}
+
+.schedule-row {
   display: grid;
-  grid-template-columns: 82px repeat(
-    auto-fit,
-    minmax(210px, 1fr)
-  );
+  grid-template-columns: 82px repeat(4, 1fr);
   min-width: 930px;
 }
 

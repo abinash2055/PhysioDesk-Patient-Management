@@ -698,167 +698,195 @@ export default function SchedulePage() {
         ) : (
           <div className="schedule-card">
             <div className="schedule-grid">
-              <div className="schedule-time-column">
-                <div className="schedule-corner">Time</div>
+              {(() => {
+                const therapistRows = [];
+                const chunkSize = 4;
 
-                {timeSlots.map((time) => (
-                  <div
-                    className="schedule-time-cell"
-                    key={time}
-                  >
-                    {formatTime(time)}
-                  </div>
-                ))}
-              </div>
+                for (let i = 0; i < filteredTherapists.length; i += chunkSize) {
+                  therapistRows.push(filteredTherapists.slice(i, i + chunkSize));
+                }
 
-              {filteredTherapists.map((therapist) => {
-                const schedule = getTherapistSchedule(therapist.id);
-                const isDayOff = !schedule;
-
-                return (
-                  <div
-                    className="therapist-column"
-                    key={therapist.id}
-                  >
-                    <div className="therapist-column-header">
-                      <strong>{therapist.name}</strong>
-                      <span>{therapist.specialty}</span>
-
-                      {isDayOff ? (
-                        <span className="schedule-day-off-badge">
-                          Day off
-                        </span>
+                return therapistRows.map((rowTherapists, rowIndex) => (
+                  <div className="schedule-row" key={rowIndex}>
+                    <div className="schedule-time-column">
+                      {rowIndex === 0 ? (
+                        <div className="schedule-corner">Time</div>
                       ) : (
-                        <span className="schedule-hours">
-                          {formatTime(schedule.start_time)} –{" "}
-                          {formatTime(schedule.end_time)}
-                        </span>
+                        <div className="schedule-corner" />
                       )}
+
+                      {timeSlots.map((time) => (
+                        <div
+                          className="schedule-time-cell"
+                          key={time}
+                        >
+                          {formatTime(time)}
+                        </div>
+                      ))}
                     </div>
 
-                    {timeSlots.map((time) => {
-                      const appointment = getAppointment(
-                        therapist.id,
-                        time,
-                      );
+                    {Array.from({ length: 4 }).map((_, index) => {
+                      const therapist = rowTherapists[index];
 
-                      const insideSchedule =
-                        isSlotInsideSchedule(therapist.id, time);
-
-                      if (appointment) {
+                      if (!therapist) {
                         return (
                           <div
-                            className={`schedule-slot appointment-slot status-${appointment.status
-                              .toLowerCase()
-                              .replace(/\s+/g, "-")}`}
-                            key={`${therapist.id}-${time}`}
-                          >
-                            <button
-                              className="appointment-content"
-                              onClick={() =>
-                                openEditModal(appointment)
-                              }
-                            >
-                              <strong>
-                                {getPatientName(
-                                  appointment.patient_id,
-                                )}
-                              </strong>
-
-                              <span>
-                                {formatTime(appointment.start_time)}{" "}
-                                –{" "}
-                                {formatTime(appointment.end_time)}
-                              </span>
-
-                              <small>
-                                {appointment.session_type ||
-                                  "Physiotherapy Session"}
-                              </small>
-                            </button>
-
-                            <div className="appointment-actions">
-                              {appointment.status === "Booked" && (
-                                <button
-                                  className="appointment-action-button"
-                                  title="Complete"
-                                  onClick={() =>
-                                    completeAppointment(
-                                      appointment,
-                                    )
-                                  }
-                                >
-                                  <Check size={14} />
-                                </button>
-                              )}
-
-                              {appointment.status !== "Completed" &&
-                                appointment.status !==
-                                  "Cancelled" && (
-                                  <button
-                                    className="appointment-action-button"
-                                    title="Cancel"
-                                    onClick={() =>
-                                      cancelAppointment(
-                                        appointment,
-                                      )
-                                    }
-                                  >
-                                    <X size={14} />
-                                  </button>
-                                )}
-
-                              <button
-                                className="appointment-action-button"
-                                title="Edit / reschedule"
-                                onClick={() =>
-                                  openEditModal(appointment)
-                                }
-                              >
-                                <Edit3 size={14} />
-                              </button>
-                            </div>
-                          </div>
-                        );
-                      }
-
-                      if (isDayOff) {
-                        return (
-                          <div
-                            className="schedule-slot day-off-slot"
-                            key={`${therapist.id}-${time}`}
+                            className="therapist-column"
+                            key={`empty-${rowIndex}-${index}`}
                           />
                         );
                       }
 
-                      if (!insideSchedule) {
-                        return (
-                          <div
-                            className="schedule-slot outside-hours-slot"
-                            key={`${therapist.id}-${time}`}
-                          />
-                        );
-                      }
+                      const schedule = getTherapistSchedule(therapist.id);
+                      const isDayOff = !schedule;
 
                       return (
-                        <button
-                          className="schedule-slot available-slot"
-                          key={`${therapist.id}-${time}`}
-                          onClick={() =>
-                            openCreateModal(
+                        <div
+                          className="therapist-column"
+                          key={therapist.id}
+                        >
+                          <div className="therapist-column-header">
+                            <strong>{therapist.name}</strong>
+                            <span>{therapist.specialty}</span>
+
+                            {isDayOff ? (
+                              <span className="schedule-day-off-badge">
+                                Day off
+                              </span>
+                            ) : (
+                              <span className="schedule-hours">
+                                {formatTime(schedule.start_time)} –{" "}
+                                {formatTime(schedule.end_time)}
+                              </span>
+                            )}
+                          </div>
+
+                          {timeSlots.map((time) => {
+                            const appointment = getAppointment(
                               therapist.id,
                               time,
-                            )
-                          }
-                          title={`Book ${formatTime(time)}`}
-                        >
-                          <Plus size={14} />
-                        </button>
+                            );
+
+                            const insideSchedule =
+                              isSlotInsideSchedule(therapist.id, time);
+
+                            if (appointment) {
+                              return (
+                                <div
+                                  className={`schedule-slot appointment-slot status-${appointment.status
+                                    .toLowerCase()
+                                    .replace(/\s+/g, "-")}`}
+                                  key={`${therapist.id}-${time}`}
+                                >
+                                  <button
+                                    className="appointment-content"
+                                    onClick={() =>
+                                      openEditModal(appointment)
+                                    }
+                                  >
+                                    <strong>
+                                      {getPatientName(
+                                        appointment.patient_id,
+                                      )}
+                                    </strong>
+
+                                    <span>
+                                      {formatTime(appointment.start_time)}{" "}
+                                      –{" "}
+                                      {formatTime(appointment.end_time)}
+                                    </span>
+
+                                    <small>
+                                      {appointment.session_type ||
+                                        "Physiotherapy Session"}
+                                    </small>
+                                  </button>
+
+                                  <div className="appointment-actions">
+                                    {appointment.status === "Booked" && (
+                                      <button
+                                        className="appointment-action-button"
+                                        title="Complete"
+                                        onClick={() =>
+                                          completeAppointment(
+                                            appointment,
+                                          )
+                                        }
+                                      >
+                                        <Check size={14} />
+                                      </button>
+                                    )}
+
+                                    {appointment.status !== "Completed" &&
+                                      appointment.status !==
+                                        "Cancelled" && (
+                                        <button
+                                          className="appointment-action-button"
+                                          title="Cancel"
+                                          onClick={() =>
+                                            cancelAppointment(
+                                              appointment,
+                                            )
+                                          }
+                                        >
+                                          <X size={14} />
+                                        </button>
+                                      )}
+
+                                    <button
+                                      className="appointment-action-button"
+                                      title="Edit / reschedule"
+                                      onClick={() =>
+                                        openEditModal(appointment)
+                                      }
+                                    >
+                                      <Edit3 size={14} />
+                                    </button>
+                                  </div>
+                                </div>
+                              );
+                            }
+
+                            if (isDayOff) {
+                              return (
+                                <div
+                                  className="schedule-slot day-off-slot"
+                                  key={`${therapist.id}-${time}`}
+                                />
+                              );
+                            }
+
+                            if (!insideSchedule) {
+                              return (
+                                <div
+                                  className="schedule-slot outside-hours-slot"
+                                  key={`${therapist.id}-${time}`}
+                                />
+                              );
+                            }
+
+                            return (
+                              <button
+                                className="schedule-slot available-slot"
+                                key={`${therapist.id}-${time}`}
+                                onClick={() =>
+                                  openCreateModal(
+                                    therapist.id,
+                                    time,
+                                  )
+                                }
+                                title={`Book ${formatTime(time)}`}
+                              >
+                                <Plus size={14} />
+                              </button>
+                            );
+                          })}
+                        </div>
                       );
                     })}
                   </div>
-                );
-              })}
+                ));
+              })()}
             </div>
           </div>
         )}
