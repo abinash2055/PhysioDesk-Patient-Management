@@ -2,6 +2,47 @@
     width: 100%;
 }
 
+/* Base buttons (matching other pages) */
+.primary-button,
+.secondary-button {
+    height: 42px;
+    padding: 0 15px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 9px;
+    font-family: var(--font-inter);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.primary-button {
+    border: 1px solid var(--primary);
+    background: var(--primary);
+    color: white;
+}
+
+.primary-button:hover {
+    opacity: 0.9;
+}
+
+.primary-button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.secondary-button {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-primary);
+}
+
+.secondary-button:hover {
+    background: var(--background);
+}
+
 .therapist-layout {
     display: grid;
     grid-template-columns: minmax(280px, 0.8fr) minmax(500px, 1.7fr);

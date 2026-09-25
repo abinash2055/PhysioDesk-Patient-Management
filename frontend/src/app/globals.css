@@ -61,3 +61,20 @@ h1, h2, h3, h4, h5, h6 {
 .mono {
   font-family: var(--font-plex-mono), monospace;
 }
+
+/* Push main content clear of the fixed sidebar */
+.main-content {
+  margin-left: 250px;
+  min-height: 100vh;
+  padding: 24px 28px 40px;
+  width: calc(100% - 250px);
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+    padding-top: calc(24px + env(safe-area-inset-top));
+  }
+}
