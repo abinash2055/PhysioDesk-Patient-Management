@@ -186,7 +186,7 @@ export default function SchedulePage() {
         therapists.map(async (therapist) => {
           const [scheduleResponse, overrideResponse] = await Promise.all([
             api.get(`/api/therapists/${therapist.id}/schedule`),
-            api.get(`/api/therapists/${therapist.id}/schedule/overrides`),
+            api.get(`/api/therapists/${therapist.id}/schedule-overrides`),
           ]);
 
           therapistSchedules[therapist.id] = Array.isArray(

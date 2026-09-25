@@ -120,7 +120,7 @@ export default function TherapistsPage() {
 
       const [scheduleResponse, overrideResponse] = await Promise.all([
         api.get(`/api/therapists/${therapist.id}/schedule`),
-        api.get(`/api/therapists/${therapist.id}/overrides`),
+        api.get(`/api/therapists/${therapist.id}/schedule-overrides`),
       ]);
 
       setSchedules(scheduleResponse.data);
@@ -324,7 +324,7 @@ export default function TherapistsPage() {
       };
 
       await api.post(
-        `/api/therapists/${selectedTherapist.id}/overrides`,
+        `/api/therapists/${selectedTherapist.id}/schedule-overrides`,
         payload
       );
 
