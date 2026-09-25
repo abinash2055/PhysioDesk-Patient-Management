@@ -10,6 +10,7 @@ import {
   Edit3,
   Plus,
   RefreshCw,
+  Search,
   X,
 } from "lucide-react";
 
@@ -117,6 +118,10 @@ export default function SchedulePage() {
     session_type: "Physiotherapy Session",
     notes: "",
   });
+
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("All");
+  const [timeFilter, setTimeFilter] = useState("All");
 
   const selectedDateString = formatDateForApi(selectedDate);
   const selectedDayOfWeek = getDayOfWeek(selectedDate);
@@ -256,6 +261,46 @@ export default function SchedulePage() {
 
     return slots;
   }, []);
+
+  const filteredTherapists = useMemo(() => {
+    const query = search.trim().toLowerCase();
+
+    return therapists.filter((therapist) => {
+      const schedule = getTherapistSchedule(therapist.id);
+      const isDayOff = !schedule;
+
+      const matchesSearch =
+        !query ||
+        therapist.name.toLowerCase().includes(query) ||
+        (therapist.specialty || "").toLowerCase().includes(query);
+
+      const matchesStatus =
+        statusFilter === "All" ||
+        (statusFilter === "Active" && therapist.is_active) ||
+        (statusFilter === "Day off" && isDayOff);
+
+      let matchesTime = true;
+
+      if (timeFilter !== "All" && schedule) {
+        const startMinutes = timeToMinutes(schedule.start_time);
+        const endMinutes = timeToMinutes(schedule.end_time);
+
+        if (timeFilter === "Morning" && !(startMinutes < 12 * 60)) {
+          matchesTime = false;
+        }
+
+        if (timeFilter === "Afternoon" && !(startMinutes >= 12 * 60 && startMinutes < 17 * 60)) {
+          matchesTime = false;
+        }
+
+        if (timeFilter === "Evening" && !(startMinutes >= 17 * 60)) {
+          matchesTime = false;
+        }
+      }
+
+      return matchesSearch && matchesStatus && matchesTime;
+    });
+  }, [therapists, schedules, overrides, selectedDateString, selectedDayOfWeek, search, statusFilter, timeFilter]);
 
   function getTherapistSchedule(therapistId) {
     const weeklySchedule = schedules[therapistId] || [];
@@ -546,6 +591,51 @@ export default function SchedulePage() {
           </button>
         </div>
 
+        <div className="schedule-search-card">
+          <div className="schedule-search">
+            <Search size={17} />
+
+            <input
+              type="search"
+              placeholder="Search therapist or specialty..."
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+            />
+          </div>
+
+          <div className="schedule-status-filters">
+            {["All", "Active", "Day off"].map((status) => (
+              <button
+                key={status}
+                className={
+                  statusFilter === status
+                    ? "schedule-filter active"
+                    : "schedule-filter"
+                }
+                onClick={() => setStatusFilter(status)}
+              >
+                {status}
+              </button>
+            ))}
+          </div>
+
+          <div className="schedule-time-filters">
+            {["All", "Morning", "Afternoon", "Evening"].map((slot) => (
+              <button
+                key={slot}
+                className={
+                  timeFilter === slot
+                    ? "schedule-filter active"
+                    : "schedule-filter"
+                }
+                onClick={() => setTimeFilter(slot)}
+              >
+                {slot}
+              </button>
+            ))}
+          </div>
+        </div>
+
         {error && (
           <div className="schedule-error">
             <span>{error}</span>
@@ -597,12 +687,12 @@ export default function SchedulePage() {
             <Clock3 size={22} />
             Loading schedule...
           </div>
-        ) : therapists.length === 0 ? (
+        ) : filteredTherapists.length === 0 ? (
           <div className="empty-state schedule-empty">
             <CalendarDays size={28} />
-            <h3>No active therapists</h3>
+            <h3>No therapists match your filters</h3>
             <p>
-              Add or activate a therapist before creating appointments.
+              Adjust your search or clear the filters to see the full schedule.
             </p>
           </div>
         ) : (
@@ -621,7 +711,7 @@ export default function SchedulePage() {
                 ))}
               </div>
 
-              {therapists.map((therapist) => {
+              {filteredTherapists.map((therapist) => {
                 const schedule = getTherapistSchedule(therapist.id);
                 const isDayOff = !schedule;
 
