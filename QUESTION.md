@@ -27,7 +27,7 @@ The UI must follow this design system exactly - do not substitute your own color
 # 3.2. Color Palette
 
 ## Color Palette
-<!-- 
+
 | Role | HEX | Usages |
 |---|---|---|
 | **Primary** | `#B8763A` | Primary buttons, active nav item, key highlights/CTAs |
@@ -44,69 +44,7 @@ The UI must follow this design system exactly - do not substitute your own color
 | **Text - Secondary (muted)** | `#797365` | Supporting/secondary text, captions |
 | **Status - Success** | `#4F7C63`<br>Soft: `#E1EBE3` | Paid, active, booked/positive states |
 | **Status - Error/Danger** | `#B5493B`<br>Soft: `#F3DEDA` | Overdue, cancelled, destructive actions |
-| **Status - Neutral/Info** | `#5E6B78`<br>Soft: `#E7EBEE` | Pending, on-hold, informational states | -->
-
-
-ROLE:   Primary                     
-HEX:    #B8763A   
-USAGES: Primary buttons, active nav item, key highlights/CTAs  
-
-ROLE:   Primary - Text on Soft      
-HEX:    #5C3A17
-USAGES: Text placed on Primary Soft backgrounds
-
-ROLE:   Primary - Soft             
-HEX:    #F0DFC7
-USAGES: Tinted backgrounds/badges using the primary color
-
-ROLE:   Secondary  
-HEX:    #132420
-USAGES: Sidebar background; secondary dark surface
-
-ROLE:   Secondary - Light           
-HEX:    #1D362F
-USAGES: Sidebar hover state / active surface on dark background
-
-ROLE:   Tertiary                    
-HEX:    #4F7C63
-USAGES: Tertiary accent; also reused as the "Success" status color
-
-ROLE:   Tertiary - Soft             
-HEX:    #E1EBE3
-USAGES: Tertiary/success tag background
-
-ROLE:   Background                  
-HEX:    #F6F3EA 
-USAGES: App/page background
-
-ROLE:   Surface (cards/panels)      
-HEX:    #FFFFFF
-USAGES: Card and panel background 
-
-ROLE:   Border                      
-HEX:    #E4DFD1
-USAGES: Card borders, input borders, dividers
-
-ROLE:   Text - Primary              
-HEX:    #1C2622
-USAGES: Main body text, headings
-
-ROLE:   Text - Secondary (muted)    
-HEX:    #797365
-USAGES: Supporting/secondary text, captions
-
-ROLE:   Status - Success            
-HEX:    #4F7C63 (soft: #E1EBE3)
-USAGES: Paid, active, booked/positive states
-
-ROLE:   Status - Error/Danger       
-HEX:    #B5493B (soft: #F3DEDA)
-USAGES: Overdue, cancelled, destructive actions
-
-ROLE:   Status - Neutral/Info       
-HEX:    #5E6B78 (soft: #E7EBEE)
-USAGES: Pending, on-hold, informational states
-
+| **Status - Neutral/Info** | `#5E6B78`<br>Soft: `#E7EBEE` | Pending, on-hold, informational states |
 
 Use the "Primary/Secondary/Tertiary" roles for structural UI (buttons, nav, backgrounds) and the "Status" roles only for status tags/badges - don't mix the two systems.
 ---
@@ -204,7 +142,7 @@ Ability to override/assign a therapist-s schedule for a specific date (day off, 
 ## 6. Evaluation Criteria
 
 ## Evaluation Criteria
-<!-- 
+
 | Area | What We're Looking For |
 |---|---|
 | **Functional correctness** | Do CRUD flows, scheduling logic, and auth actually work end-to-end? |
@@ -216,38 +154,7 @@ Ability to override/assign a therapist-s schedule for a specific date (day off, 
 | **Design system adherence** | Correct color palette, fonts (Fraunces/Inter/IBM Plex Mono), and layout conventions (sidebar, cards, tag pills, modals) as specified in 3.0. |
 | **Git hygiene** | Commit history tells a story of how you worked. |
 | **Documentation** | Can we run it from the README alone? |
-| **Judgment** | Sensible scoping given the time budget - we'd rather see a smaller feature set done well than everything done poorly. | -->
-
-AREA - Functional correctness
-What we're looking for - Do CRUD flows, scheduling logic, and auth actually work end-to-end?
-
-AREA - Auth & authorization
-What we're looking for - Passwords hashed, tokens handled correctly, roles genuinely enforced (not just hidden in UI)
-
-AREA - Code quality & structure
-What we're looking for - Readable FastAPI project structure, sensible Next.js app organization, separation of concerns
-
-AREA - API design
-What we're looking for - RESTful conventions, Pydantic validation, sensible status codes, error handling
-
-AREA - Data modeling
-What we're looking for - Sensible PostgreSQL schema, relationships, no obvious data-integrity gaps
-
-AREA - Frontend integration
-What we're looking for - UI reflects real backend state, handles loading/error/auth states
-
-AREA - Design system adherence
-What we're looking for - Correct color palette, fonts (Fraunces/Inter/IBM Plex Mono), and layout conventions (sidebar, cards, tag pills, modals) as specified in 3.0
-
-AREA - Git hygiene
-What we're looking for - Commit history tells a story of how you worked
-
-AREA - Documentation
-What we're looking for - Can we run it from the README alone?
-
-AREA - Judgment
-What we're looking for - Sensible scoping given the time budget - we'd rather see a smaller feature set done well than everything done poorly
-
+| **Judgment** | Sensible scoping given the time budget - we'd rather see a smaller feature set done well than everything done poorly. | 
 
 We are not grading pixel-perfect design polish or animation flourishes - but the palette, fonts, and layout conventions above are a fixed requirement, not a suggestion.
 ---
